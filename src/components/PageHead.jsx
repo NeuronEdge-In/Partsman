@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { company } from '../data/company.js';
+import { PLACEHOLDER } from '../data/assets.js';
 import Breadcrumbs from './Breadcrumbs.jsx';
 
 export default function PageHead({ eyebrow, title, lead, crumbs = [], image, children }) {
@@ -19,7 +20,7 @@ export default function PageHead({ eyebrow, title, lead, crumbs = [], image, chi
               {children}
             </motion.div>
           </div>
-          {image && <motion.img src={image} alt="" initial={{ opacity: 0, x: 40, scale: .9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .8, ease: [0.22, 1, 0.36, 1] }} />}
+          {image && <motion.img src={image} alt="" initial={{ opacity: 0, x: 40, scale: .9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .8, ease: [0.22, 1, 0.36, 1] }} onError={(e) => { if (e.currentTarget.src !== PLACEHOLDER) e.currentTarget.src = PLACEHOLDER; }} />}
         </div>
       </div>
     </section>

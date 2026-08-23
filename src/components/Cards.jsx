@@ -9,7 +9,7 @@ export function ProductCard({ p }) {
   return (
     <div className="card pcard">
       <Link to={`/product/${p.slug}`} className="pcard-media" aria-label={p.name}>
-        <img src={p.thumb} alt={p.name} loading="lazy" onError={(e) => { e.currentTarget.src = PLACEHOLDER; }} />
+        <img src={p.thumb} alt={p.name} loading="lazy" onError={(e) => { if (e.currentTarget.src !== PLACEHOLDER) e.currentTarget.src = PLACEHOLDER; }} />
         <span className="badge badge-brand"><BadgeCheck />Quality assured</span>
         <span className="quick"><Search /></span>
       </Link>
@@ -28,7 +28,7 @@ export function ProductCard({ p }) {
 export function CategoryCard({ c }) {
   return (
     <Link to={`/category/${c.slug}`} className="card ccard">
-      <div className="ccard-img"><img src={c.image} alt={c.short} loading="lazy" /></div>
+      <div className="ccard-img"><img src={c.image} alt={c.short} loading="lazy" onError={(e) => { if (e.currentTarget.src !== PLACEHOLDER) e.currentTarget.src = PLACEHOLDER; }} /></div>
       <b>{c.short}</b>
       <small>{c.count} parts</small>
     </Link>
@@ -39,7 +39,7 @@ export function ModelCard({ m }) {
   return (
     <Link to={`/model/${m.slug}`} className="card mcard" style={{ '--mc-accent': m.accent }}>
       <span className="arrow"><ArrowUpRight /></span>
-      <div className="mcard-media"><img src={m.image} alt={m.short} loading="lazy" /></div>
+      <div className="mcard-media"><img src={m.image} alt={m.short} loading="lazy" onError={(e) => { if (e.currentTarget.src !== PLACEHOLDER) e.currentTarget.src = PLACEHOLDER; }} /></div>
       <div className="mcard-body">
         <div><b>{m.short}</b><small>{m.tag}</small></div>
         <span className="count">{m.count} parts</span>

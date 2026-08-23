@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { searchProducts, modelMap } from '../data/catalog.js';
+import { PLACEHOLDER } from '../data/assets.js';
 import { Search, X } from './Icons.jsx';
 
 export default function SearchBox({ autoFocus = false, onNavigate, placeholder = 'Search parts, e.g. "Signa bumper", "Ace door"…', showKbd = true }) {
@@ -59,7 +60,7 @@ export default function SearchBox({ autoFocus = false, onNavigate, placeholder =
                   {results.map((p, i) => (
                     <li key={p.slug}>
                       <Link to={`/product/${p.slug}`} className={i === hl ? 'hl' : ''} onMouseEnter={() => setHl(i)} onClick={(e) => { e.preventDefault(); go(`/product/${p.slug}`); }}>
-                        <img src={p.thumb} alt="" loading="lazy" />
+                        <img src={p.thumb} alt="" loading="lazy" onError={(e) => { if (e.currentTarget.src !== PLACEHOLDER) e.currentTarget.src = PLACEHOLDER; }} />
                         <div>
                           <div className="sd-name">{p.name}</div>
                           <div className="sd-meta">{modelMap[p.primaryModel]?.short || p.modelName} · {p.sku}</div>

@@ -6,6 +6,7 @@ import Reveal, { StaggerGrid, StaggerItem } from '../components/Reveal.jsx';
 import CountUp from '../components/CountUp.jsx';
 import { ProductCard, CategoryCard, ModelCard } from '../components/Cards.jsx';
 import { models, categories, featuredProducts, stats, BRANDS } from '../data/catalog.js';
+import { PLACEHOLDER } from '../data/assets.js';
 import { company, waLink } from '../data/company.js';
 import { ArrowRight, WhatsApp, Truck, Shield, Banknote, Wrench, Star, Zap, Package, Phone, BadgeCheck } from '../components/Icons.jsx';
 
@@ -52,7 +53,7 @@ function Hero() {
               <AnimatePresence mode="wait">
                 <motion.div key={m.slug} initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -60 }} transition={{ duration: .5, ease: [0.22, 1, 0.36, 1] }}>
                   <Link to={`/model/${m.slug}`}>
-                    <img src={m.image} alt={m.short} />
+                    <img src={m.image} alt={m.short} onError={(e) => { if (e.currentTarget.src !== PLACEHOLDER) e.currentTarget.src = PLACEHOLDER; }} />
                     <div className="hc-label"><b>{m.short}</b><span>{m.count} parts available →</span></div>
                   </Link>
                 </motion.div>
