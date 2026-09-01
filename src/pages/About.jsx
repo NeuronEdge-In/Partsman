@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import PageHead from '../components/PageHead.jsx';
 import Reveal, { StaggerGrid, StaggerItem } from '../components/Reveal.jsx';
 import CountUp from '../components/CountUp.jsx';
-import { stats, BRANDS } from '../data/catalog.js';
+import { stats, BRANDS, getModel } from '../data/catalog.js';
 import { company, waLink } from '../data/company.js';
 import { Shield, Truck, Users, Globe, Wrench, Package, WhatsApp, ArrowRight } from '../components/Icons.jsx';
 
@@ -16,7 +16,7 @@ const VALUES = [
 export default function About() {
   return (
     <>
-      <PageHead eyebrow="About us" title={`${company.name} · ${company.tagline}`} lead="We keep India's trucks on the road with body parts that fit right the first time." crumbs={[{ label: 'About' }]} image="/images/models/tata-lpt-truck-body-parts.png" />
+      <PageHead eyebrow="About us" title={`${company.name} · ${company.tagline}`} lead="We keep India's trucks on the road with body parts that fit right the first time." crumbs={[{ label: 'About' }]} image={getModel('tata-lpt-truck-body-parts')?.image} />
       <section className="section">
         <div className="container">
           <div className="grid grid-2" style={{ alignItems: 'center', gap: 48 }}>

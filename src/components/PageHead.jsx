@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { company } from '../data/company.js';
 import Breadcrumbs from './Breadcrumbs.jsx';
-import { withBase } from '../utils/assets.js';
 
 export default function PageHead({ eyebrow, title, lead, crumbs = [], image, children }) {
   useEffect(() => { document.title = `${title} | ${company.name}`; }, [title]);
@@ -20,7 +19,7 @@ export default function PageHead({ eyebrow, title, lead, crumbs = [], image, chi
               {children}
             </motion.div>
           </div>
-          {image && <motion.img src={withBase(image)} alt="" initial={{ opacity: 0, x: 40, scale: .9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .8, ease: [0.22, 1, 0.36, 1] }} />}
+          {image && <motion.img src={image} alt="" initial={{ opacity: 0, x: 40, scale: .9 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .8, ease: [0.22, 1, 0.36, 1] }} />}
         </div>
       </div>
     </section>

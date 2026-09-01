@@ -13,6 +13,18 @@ npm run preview  # serve the production build
 
 Node 18+ is required.
 
+## Deploying to GitHub Pages
+
+The site is configured for a **project page** served under `/Partsman/` (see `vite.config.js`). The build:
+
+- prefixes every JS/CSS/image URL with `/Partsman/` (`asset()` helper in `src/data/assets.js` handles catalogue images),
+- sets the router `basename` to match,
+- copies `dist/index.html` to `dist/404.html` so deep links such as `/Partsman/model/tata-lpt-truck-body-parts` load on refresh.
+
+Publish the contents of `dist/` to the `gh-pages` branch (or the folder GitHub Pages serves). For a custom domain or root hosting, build with `VITE_BASE_PATH=/ npm run build`.
+
+Locally the dev server therefore runs at **http://localhost:5173/Partsman/**.
+
 ## Configure the company details
 
 All contact details live in one file: `src/data/company.js` (WhatsApp number, phone, email, address, hours, social links, map embed). Replace the placeholder values before going live.

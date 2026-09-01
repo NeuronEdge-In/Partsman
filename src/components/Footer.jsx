@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { company } from '../data/company.js';
 import { categories, models } from '../data/catalog.js';
+import { asset } from '../data/assets.js';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Youtube, WhatsApp } from './Icons.jsx';
-import { withBase } from '../utils/assets.js';
 
 export default function Footer() {
   return (
@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <img src={withBase('/images/logo-tagline-dark.png')} alt={`${company.name} – ${company.tagline}`} />
+            <img src={asset('/images/logo-tagline-dark.png')} alt={`${company.name} – ${company.tagline}`} />
             <p>{company.name} is your one-stop destination for genuine-fit truck body parts. Bumpers, doors, fenders, grills, pillars and cabins for TATA, Ashok Leyland, Eicher, BharatBenz and SML, delivered anywhere in India.</p>
             <div className="social">
               <a href={company.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook /></a>
