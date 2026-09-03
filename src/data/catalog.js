@@ -1,4 +1,5 @@
 import raw from './catalog.json';
+import { withBase } from '../utils/assets.js';
 
 // ── Brands (derived from model slugs) ─────────────────────────
 export const BRANDS = [
@@ -52,6 +53,7 @@ const cleanName = (n) => n.replace(/^Truck\s+/i, '').replace(/^Commercial Vehicl
 
 export const categories = raw.categories.map((c) => ({
   ...c,
+  image: withBase(c.image),
   ...CATEGORY_META[c.slug],
   short: CATEGORY_META[c.slug]?.short || cleanName(c.name),
   count: c.products.length,
@@ -59,6 +61,7 @@ export const categories = raw.categories.map((c) => ({
 
 export const models = raw.models.map((m) => ({
   ...m,
+  image: withBase(m.image),
   ...MODEL_META[m.slug],
   short: MODEL_META[m.slug]?.short || m.name,
   brand: brandOf(m.slug),
@@ -67,12 +70,14 @@ export const models = raw.models.map((m) => ({
 
 export const products = raw.products.map((p) => ({
   ...p,
+  images: (p.images || []).map(withBase),
+  thumb: withBase(p.thumb),
   brand: brandOf(p.models[0] || ''),
   primaryModel: p.models[0] || '',
   primaryCategory: p.categories[0] || 'truck-others-parts',
 }));
 
-export const banners = raw.banners;
+export const banners = (raw.banners || []).map(withBase);
 
 // ── Lookups ───────────────────────────────────────────────────
 const bySlug = (list) => Object.fromEntries(list.map((x) => [x.slug, x]));

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import Breadcrumbs from '../components/Breadcrumbs.jsx';
 import Reveal, { StaggerGrid, StaggerItem } from '../components/Reveal.jsx';
 import { ProductCard } from '../components/Cards.jsx';
@@ -8,6 +8,7 @@ import NotFound from './NotFound.jsx';
 import { getProduct, modelMap, categoryMap, relatedProducts } from '../data/catalog.js';
 import { company, productEnquiryLink } from '../data/company.js';
 import { WhatsApp, Phone, Mail, ChevronLeft, ChevronRight, X, Truck, Banknote, BadgeCheck, Share, Gift, ArrowRight, Maximize } from '../components/Icons.jsx';
+import { withBase } from '../utils/assets.js';
 
 export default function ProductPage() {
   const { slug } = useParams();
@@ -24,7 +25,7 @@ export default function ProductPage() {
   if (!p) return <NotFound />;
   const model = modelMap[p.primaryModel];
   const cat = categoryMap[p.primaryCategory];
-  const imgs = p.images.length ? p.images : ['/images/placeholder.svg'];
+  const imgs = p.images.length ? p.images : [withBase('/images/placeholder.svg')];
   const next = () => setI((x) => (x + 1) % imgs.length);
   const prev = () => setI((x) => (x - 1 + imgs.length) % imgs.length);
   const related = relatedProducts(p, 8);
@@ -42,7 +43,7 @@ export default function ProductPage() {
               <div className="gallery-main" onClick={() => setZoom(true)}>
                 <span className="badge badge-brand"><BadgeCheck />Quality assured</span>
                 <AnimatePresence mode="wait">
-                  <motion.img key={imgs[i]} src={imgs[i]} alt={`${p.name} view ${i + 1}`} initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.02 }} transition={{ duration: .3 }} onError={(e) => { e.currentTarget.src = '/images/placeholder.svg'; }} />
+                  <motion.img key={imgs[i]} src={imgs[i]} alt={`${p.name} view ${i + 1}`} initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.02 }} transition={{ duration: .3 }} onError={(e) => { e.currentTarget.src = withBase('/images/placeholder.svg'); }} />
                 </AnimatePresence>
                 {imgs.length > 1 && <>
                   <button className="gallery-nav prev" aria-label="Previous image" onClick={(e) => { e.stopPropagation(); prev(); }}><ChevronLeft /></button>

@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import { modelMap, categoryMap } from '../data/catalog.js';
 import { productEnquiryLink } from '../data/company.js';
 import { ArrowUpRight, BadgeCheck, WhatsApp, Search } from './Icons.jsx';
+import { withBase } from '../utils/assets.js';
 
 export function ProductCard({ p }) {
   const model = modelMap[p.primaryModel];
   return (
     <div className="card pcard">
       <Link to={`/product/${p.slug}`} className="pcard-media" aria-label={p.name}>
-        <img src={p.thumb} alt={p.name} loading="lazy" onError={(e) => { e.currentTarget.src = '/images/placeholder.svg'; }} />
+        <img src={p.thumb} alt={p.name} loading="lazy" onError={(e) => { e.currentTarget.src = withBase('/images/placeholder.svg'); }} />
         <span className="badge badge-brand"><BadgeCheck />Quality assured</span>
         <span className="quick"><Search /></span>
       </Link>
